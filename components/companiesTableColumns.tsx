@@ -1,6 +1,15 @@
-import axios from 'axios';
 import React from "react";
+import { deleteCompany, saveCompany } from '../api/database';
+import { ICompanyProperties } from '../types/types.database';
+import { cellValue } from "../types/types.table";
 
+/**
+ * Table descriptor object.
+ * Cell describes what goes in each cell.
+ * It can either be:
+ * - Input object -> displaying some information related to a company
+ * - Button object -> Either Save / Delete to save changes made to company or delete company alltogether
+ */
 export default [
   {
     Header: "Name",
@@ -35,20 +44,21 @@ export default [
     accessor: "save",
     Cell: ({ cell }: { cell: any }) => {
       const handleSaveChanges = () => {
+        //transforming table rows into json object is a bit bleh. I should work on making this all more beautiful.
         //FIRST -> get all rows
-        const newCompany = cell.row.cells.map((element: { column: { id: any; }; value: any; }) => {
-          if (element.column.id != 'delete' && element.column.id != 'save')
-            return [element.column.id, element.value]
-          if (element.column.id === 'save') return ['id', cell.value]
+        const newCompany = cell.row.cells.map((cellValue: cellValue) => {
+          if (cellValue.column.id != 'delete' && cellValue.column.id != 'save')
+            return [cellValue.column.id, cellValue.value]
+          if (cellValue.column.id === 'save') return ['id', cell.value]
         })
         //SECOND => trim rows that are not relevant
-        const newCompanyObject = Object.fromEntries(newCompany.filter((element: undefined) => {
-          return element != undefined
+        const newCompanyObject = Object.fromEntries(newCompany.filter((value: cellValue) => {
+          return value != undefined
         }))
         //THIRD => Add current price equal to init price
         newCompanyObject.currentPricePerShare = newCompanyObject.initPricePerShare
         //FOURTH => Send to API
-        axios.put(`http://localhost:3000/mysql/company/${cell.value}`, {}, { params: newCompanyObject })
+        saveCompany(newCompanyObject as ICompanyProperties)
       }
       return <button onClick={() => { handleSaveChanges() }}>Save Changes</button>
     },
@@ -58,11 +68,9 @@ export default [
     accessor: "delete",
     Cell: ({ cell }: { cell: any }) => {
       const handleDelete = () => {
-        axios.delete(`http://localhost:3000/mysql/company/${cell.value}`).then((_onSuccess) => {
-          window.location.reload();
-        }, (onReject) => {
-          console.log('ERROR: ')
-          console.log(onReject)
+        //delete company from database. If cannot delete company will stay there.
+        deleteCompany(cell.value).then((deleted) => {
+          if (deleted) window.location.reload();
         })
       }
       return (<button onClick={() => { handleDelete() }} value="delete" >
