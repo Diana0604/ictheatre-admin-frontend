@@ -5,7 +5,7 @@ import { playShow, pauseShow } from '../api/showManagement'
 import { restartDatabase } from '../api/database'
 
 export default function Home() {
-  const [playing, setPlaying] = useState(false)
+  const [playing, isPlaying] = useState(false)
   const [warningOn, setWarningOn] = useState(false)
   const warning = "YOU TRIED RESETTING WHEN DATABASE WAS ON!"
 
@@ -18,14 +18,14 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        Show status: {playing? `Show is playing` : `Show is not playing`}
-        <button onClick={() => {playShow(setPlaying); setWarningOn(false);}}>Play Show</button>
-        <button onClick={() => {pauseShow(setPlaying); setWarningOn(false);}}>Pause Show</button>
+        Show status: {playing ? `Show is playing` : `Show is not playing`}
+        <button onClick={() => { playShow(isPlaying); setWarningOn(false); }}>Play Show</button>
+        <button onClick={() => { pauseShow(isPlaying); setWarningOn(false); }}>Pause Show</button>
         <div>
           {warningOn ? `${warning}` : ''}
         </div>
         <div>
-          <button onClick = {() => {restartDatabase(setWarningOn)}}>Restart Database</button>
+          <button onClick={() => { restartDatabase(setWarningOn) }}>Restart Database</button>
         </div>
       </main>
     </div>

@@ -1,21 +1,30 @@
 import axios from "axios";
 import config from "../config/config.index";
+import { setterFunction } from "../types/types.generic";
 
 const showUrl = `${config.baseUrl}/show`;
 
-export const playShow = async (setPlaying: (arg0: boolean) => void) => {
+/**
+ * Ask API to play show. Set show to playing if successfull call.
+ * @param isPlaying setter function for show playing
+ */
+export const playShow = async (isPlaying: setterFunction) => {
   try {
     await axios.post(`${showUrl}/play`);
-    setPlaying(true);
+    isPlaying(true);
   } catch (error) {
     console.log(`error asking api to play show`);
   }
 };
 
-export const pauseShow = async (setPlaying: (arg0: boolean) => void) => {
+/**
+ * Ask API to pause show. Set show to pause if successfull call.
+ * @param isPlaying setter function for show playing
+ */
+export const pauseShow = async (isPlaying: setterFunction) => {
   try {
     await axios.post(`${showUrl}/pause`);
-    setPlaying(false);
+    isPlaying(false);
   } catch (error) {
     console.log(`error asking api to play show`);
     console.log(error);

@@ -1,9 +1,14 @@
 import axios from "axios";
 import config from "../config/config.index";
+import { setterFunction } from "../types/types.generic";
 const databaseUrl = `${config.baseUrl}/mysql`;
 
+/**
+ * Ask api to restart database
+ * @param setWarningOn setter function for can't restart warning. If cannot restart database due to show running will warn user
+ */
 export const restartDatabase = async (
-  setWarningOn: (arg0: boolean) => void
+  setWarningOn: setterFunction
 ) => {
   try {
     await axios.post(`${databaseUrl}/restart`);
