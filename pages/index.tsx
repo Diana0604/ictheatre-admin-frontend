@@ -14,6 +14,9 @@ export default function Home() {
       <li>
         <Link href="/state">State</Link>
       </li>
+      <li>
+        <Link href="/companies">Companes Manager</Link>
+      </li>
     </ul>
   )
 }
