@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getCompanies } from "../api/database"
-import companiesTableCollumns from "../components/companiesTableCollumns"
+import companiesTableColumns from "../components/companiesTableColumns"
 import TableContainer from "../components/TableContainer"
 
 export default function Companies() {
@@ -18,6 +18,6 @@ export default function Companies() {
     })
   }, [])
   return <div>
-    <TableContainer columns={companiesTableCollumns} data={companiesList} />
+    <TableContainer columns={companiesTableColumns} data={companiesList} />
   </div>
 }
