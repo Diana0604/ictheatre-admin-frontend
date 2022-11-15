@@ -27,23 +27,7 @@ const TableContainer = ({ columns, data }: { columns: readonly Column<{}>[], dat
     columns,
     data,
   })
-
-  const rowsDisplay = rows.map((row, i) => {
-    /**
-     * prepareRow (from react-table documentation):
-     * This function is responsible for lazily preparing a row for rendering.
-     * Any row that you intend to render in your table needs to be passed to this function before every render.
-     */
-    prepareRow(row);
-    return (
-      <tr {...row.getRowProps()}>
-        {row.cells.map((cell) => {
-          return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-        })}
-      </tr>
-    );
-  })
-  console.log(rowsDisplay)
+  //return table built
   return (
     <div>
       <table {...getTableProps()}>
@@ -59,16 +43,27 @@ const TableContainer = ({ columns, data }: { columns: readonly Column<{}>[], dat
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                })}
-              </tr>
-            );
-          })}
+          {
+            /**
+             * rows (from react-table documentation):
+             * An array of materialized row objects from the original data array and columns passed into the table options
+             */
+            rows.map((row) => {
+              /**
+               * prepareRow (from react-table documentation):
+               * This function is responsible for lazily preparing a row for rendering.
+               * Any row that you intend to render in your table needs to be passed to this function before every render.
+               */
+              prepareRow(row);
+              //setup object that will be displayed
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                  })}
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
