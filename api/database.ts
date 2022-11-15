@@ -1,6 +1,5 @@
 import axios from "axios";
 import config from "../config/config.index";
-
 const databaseUrl = `${config.baseUrl}/mysql`;
 
 export const restartDatabase = async (

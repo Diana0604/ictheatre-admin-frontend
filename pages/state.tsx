@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Navbar from '../components/navbar/NavBar'
 import styles from '../styles/Home.module.css'
 
 export default function State() {
@@ -11,6 +12,7 @@ export default function State() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Navbar />
       <main className={styles.main}>
         State display!
       </main>
