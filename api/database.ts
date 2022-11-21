@@ -65,3 +65,16 @@ export const saveCompany = async (companyObject: ICompanyProperties) => {
     console.log(error);
   }
 };
+
+/**
+ * get list of sellers and their shares
+ */
+export const getSellers = async () => {
+  try {
+    const res = await axios.get(`${databaseUrl}/sellers`);
+    return res.data;
+  } catch (error) {
+    console.log("error getting companies back");
+    console.log(error);
+  }
+};
