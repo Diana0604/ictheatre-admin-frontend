@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Navbar from '../../components/navbar/NavBar'
+import PlayerInformation from '../../components/PlayerInformation'
 import styles from '../../styles/Home.module.css'
 
 /**
@@ -17,8 +18,11 @@ export default function State() {
       </Head>
 
       <Navbar />
-      <main className={styles.main}>
-        State display!
+      <main>
+        <div style={{ display: "flex", height: "100%" }}>
+          <PlayerInformation />
+          <div style={{ backgroundColor: "lightpink" }}>hellos</div>
+        </div>
       </main>
     </div>
   )

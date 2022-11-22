@@ -128,3 +128,18 @@ export const deleteSeller = async (sellerId: number) => {
     return false;
   }
 };
+
+/**
+ * obtain player compani object from api
+ * @returns player company information
+ */
+export const getPlayerCompany = async () => {
+  try {
+    const res = await axios.get(`${databaseUrl}/playercompany`);
+    return res.data;
+  } catch (error) {
+    console.log(`ERROR while trying to get player company`);
+    console.log(error);
+    return false;
+  }
+};
