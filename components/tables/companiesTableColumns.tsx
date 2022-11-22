@@ -1,7 +1,7 @@
 import React from "react";
-import { deleteCompany, saveCompany } from '../api/database';
-import { ICompanyProperties } from '../types/types.database';
-import { cellValue } from "../types/types.table";
+import { deleteCompany, saveCompany } from '../../api/database';
+import { ICompanyProperties } from '../../types/types.database';
+import { cellValue } from "../../types/types.table";
 
 /**
  * Table descriptor object.

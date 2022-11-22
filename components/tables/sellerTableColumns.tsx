@@ -1,7 +1,6 @@
 import React from "react";
-import { deleteCompany, deleteSeller, saveCompany, saveSeller, saveShareBundle } from '../api/database';
-import { ICompanyProperties } from '../types/types.database';
-import { cellValue } from "../types/types.table";
+import { deleteSeller, saveSeller, saveShareBundle } from '../../api/database';
+import { cellValue } from "../../types/types.table";
 
 /**
  * Table descriptor object.

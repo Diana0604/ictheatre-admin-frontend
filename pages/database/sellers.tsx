@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { getSellers, getCompanies } from "../../api/database"
-import sellerTableColumns from "../../components/sellerTableColumns"
+import sellerTableColumns from "../../components/tables/sellerTableColumns"
 import Navbar from "../../components/navbar/NavBar"
-import TableContainer from "../../components/TableContainer"
+import TableContainer from "../../components/tables/TableContainer"
 import styles from '../../styles/Home.module.css'
 
 /**
