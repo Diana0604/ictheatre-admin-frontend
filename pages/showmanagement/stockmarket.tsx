@@ -1,6 +1,9 @@
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import { getCompanies, getSellers } from '../../api/database'
 import Navbar from '../../components/navbar/NavBar'
 import PlayerInformation from '../../components/PlayerInformation'
+import SellerInformation from '../../components/SellerInformation'
 import styles from '../../styles/Home.module.css'
 
 /**
@@ -9,6 +12,33 @@ import styles from '../../styles/Home.module.css'
  * @returns
  */
 export default function State() {
+  const [sellersInformation, setSellersInformation] = useState<any>({})
+  const [sharersDisplay, setSharersDisplay] = useState<any[]>([])
+  const [allCompanies, setAllCompanies] = useState<any[]>([])
+
+  useEffect(() => {
+  }, [])
+
+  setTimeout(() => {
+    getCompanies().then(companies => {
+      setAllCompanies(companies)
+      getSellers().then(newSellers => {
+        setSellersInformation(newSellers)
+      })
+    })
+  }, 1000)
+
+  useEffect(() => {
+    if (Object.keys(sellersInformation).length === 0) return;
+    const sellers = sellersInformation.sellers;
+    const shareBundles = sellersInformation.shareBundles;
+    const newDisplay = []
+    for (const seller of sellers) {
+      newDisplay.push(<SellerInformation key={seller.id} bundles={shareBundles} seller={seller} companies={allCompanies} />)
+    }
+    setSharersDisplay(newDisplay)
+  }, [sellersInformation])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -21,7 +51,9 @@ export default function State() {
       <main>
         <div style={{ display: "flex", height: "100%" }}>
           <PlayerInformation />
-          <div style={{ backgroundColor: "lightpink" }}>hellos</div>
+          <div style={{ marginLeft: "50px" }}>
+            {sharersDisplay}
+          </div>
         </div>
       </main>
     </div>
