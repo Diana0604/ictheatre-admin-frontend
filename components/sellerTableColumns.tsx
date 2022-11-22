@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteCompany, saveCompany } from '../api/database';
+import { deleteCompany, saveCompany, saveSeller, saveShareBundle } from '../api/database';
 import { ICompanyProperties } from '../types/types.database';
 import { cellValue } from "../types/types.table";
 
@@ -23,7 +23,20 @@ export default [
     accessor: "save",
     Cell: ({ cell }: { cell: any }) => {
       const handleSaveChanges = () => {
-        console.log('not implemented')
+        //obtain all information on this row
+        const sellerInformation = { name: '', id: cell.value }
+        cell.row.cells.map((cellValue: cellValue) => {
+          if (cellValue.column.id != 'delete' && cellValue.column.id != 'save') {
+            if (cellValue.column.id === 'name') sellerInformation.name = cellValue.value
+            else {
+              console.log(cellValue.column)
+              const id = cell.value as number * cellValue.column.id as number;
+              const newBundle = { ownerId: cell.value, companyId: cellValue.column.id, quantity: cellValue.value, id: id }
+              saveShareBundle(newBundle)
+            }
+          }
+        })
+        saveSeller(sellerInformation)
       }
       return <button onClick={() => { handleSaveChanges() }}>Save Changes</button>
     },

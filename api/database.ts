@@ -78,3 +78,37 @@ export const getSellers = async () => {
     console.log(error);
   }
 };
+
+/**
+ * save seller information into database
+ * @param sellerObject json object with company information to be saved
+ */
+export const saveSeller = async (sellerObject: any) => {
+  try {
+    await axios.put(
+      `${databaseUrl}/sellers/${sellerObject.id}`,
+      {},
+      { params: sellerObject }
+    );
+  } catch (error) {
+    console.log(`ERROR: could not save ${sellerObject.id}`);
+    console.log(error);
+  }
+};
+
+/**
+ * save share bundle object information into database
+ * @param shareBundleObject json object with company information to be saved
+ */
+export const saveShareBundle = async (shareBundleObject: any) => {
+  try {
+    await axios.put(
+      `${databaseUrl}/shareBundle/${shareBundleObject.id}`,
+      {},
+      { params: shareBundleObject }
+    );
+  } catch (error) {
+    console.log(`ERROR: could not save ${shareBundleObject.id}`);
+    console.log(error);
+  }
+};
