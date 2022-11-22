@@ -112,3 +112,19 @@ export const saveShareBundle = async (shareBundleObject: any) => {
     console.log(error);
   }
 };
+
+/**
+ * delete seller from database and all their shares
+ * @param sellerId id of seller to be deleted
+ * @returns true if deleted / false if error
+ */
+export const deleteSeller = async (sellerId: number) => {
+  try {
+    await axios.delete(`${databaseUrl}/sellers/${sellerId}`);
+    return true;
+  } catch (error) {
+    console.log(`ERROR while trying to delete company with id: ${sellerId}`);
+    console.log(error);
+    return false;
+  }
+};

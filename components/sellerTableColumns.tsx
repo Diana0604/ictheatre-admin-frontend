@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteCompany, saveCompany, saveSeller, saveShareBundle } from '../api/database';
+import { deleteCompany, deleteSeller, saveCompany, saveSeller, saveShareBundle } from '../api/database';
 import { ICompanyProperties } from '../types/types.database';
 import { cellValue } from "../types/types.table";
 
@@ -46,7 +46,10 @@ export default [
     accessor: "delete",
     Cell: ({ cell }: { cell: any }) => {
       const handleDelete = () => {
-        console.log('not implemented')
+        //delete company from database. If cannot delete company will stay there.
+        deleteSeller(cell.value).then((deleted) => {
+          if (deleted) window.location.reload();
+        })
       }
       return (<button onClick={() => { handleDelete() }} value="delete" >
         Delete
