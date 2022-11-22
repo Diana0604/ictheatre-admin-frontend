@@ -1,9 +1,9 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 import { useState } from 'react'
-import { playShow, pauseShow } from '../api/showManagement'
-import { restartDatabase } from '../api/database'
-import Navbar from '../components/navbar/NavBar'
+import { playShow, pauseShow } from '../../api/showManagement'
+import { restartDatabase } from '../../api/database'
+import Navbar from '../../components/navbar/NavBar'
 
 /**
  * Admin page -> allows user to play / pause show and restart database to initial values

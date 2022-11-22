@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { getSellers, getCompanies } from "../api/database"
-import sellerTableColumns from "../components/sellerTableColumns"
-import Navbar from "../components/navbar/NavBar"
-import TableContainer from "../components/TableContainer"
-import styles from '../styles/Home.module.css'
+import { getSellers, getCompanies } from "../../api/database"
+import sellerTableColumns from "../../components/sellerTableColumns"
+import Navbar from "../../components/navbar/NavBar"
+import TableContainer from "../../components/TableContainer"
+import styles from '../../styles/Home.module.css'
 
 /**
  * Display an editeable table with sellers information and their shares that can be modified and updated to the server

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { getCompanies } from "../api/database"
-import companiesTableColumns from "../components/companiesTableColumns"
-import Navbar from "../components/navbar/NavBar"
-import TableContainer from "../components/TableContainer"
-import styles from '../styles/Home.module.css'
+import { getCompanies } from "../../api/database"
+import companiesTableColumns from "../../components/companiesTableColumns"
+import Navbar from "../../components/navbar/NavBar"
+import TableContainer from "../../components/TableContainer"
+import styles from '../../styles/Home.module.css'
 
 /**
  * Display an editeable table with companies information that can be modified and updated to the server

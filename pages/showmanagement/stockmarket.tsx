@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Navbar from '../components/navbar/NavBar'
-import styles from '../styles/Home.module.css'
+import Navbar from '../../components/navbar/NavBar'
+import styles from '../../styles/Home.module.css'
 
 /**
  * Display state of game (current stock value, company player info etc.)
