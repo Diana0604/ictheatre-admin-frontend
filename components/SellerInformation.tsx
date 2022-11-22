@@ -1,4 +1,5 @@
 import React from "react";
+import BundleInformation from "./BundleInformation";
 /**
  * Seller information with their bundles and shares and everything
  * @param props
@@ -11,7 +12,7 @@ const SellerInformation = ({ seller, bundles, companies }: { seller: any, bundle
     if (bundle.quantity === 0) continue;
     for (const company of companies) {
       if (bundle.companyId != company.id) continue;
-      const relevantBundle = <div key={bundle.id}> <b>{company.name}:</b> {bundle.quantity} shares. Price per share: {company.currentPricePerShare} </div>
+      const relevantBundle = <BundleInformation key={bundle.id} companyName={company.name} quantity={bundle.quantity} currentPrice={company.currentPricePerShare} />
       relevantBundles.push(relevantBundle)
     }
   }
