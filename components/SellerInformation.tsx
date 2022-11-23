@@ -12,7 +12,7 @@ const SellerInformation = ({ seller, bundles, companies }: { seller: any, bundle
     if (bundle.quantity === 0) continue;
     for (const company of companies) {
       if (bundle.companyId != company.id) continue;
-      const relevantBundle = <BundleInformation key={bundle.id} companyName={company.name} quantity={bundle.quantity} currentPrice={company.currentPricePerShare} />
+      const relevantBundle = <BundleInformation key={bundle.id} bundle={bundle} company={company} />
       relevantBundles.push(relevantBundle)
     }
   }

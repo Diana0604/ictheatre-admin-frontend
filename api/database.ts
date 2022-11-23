@@ -143,3 +143,13 @@ export const getPlayerCompany = async () => {
     return false;
   }
 };
+
+export const sellShares = async (
+  bundle: any,
+  quantity: number,
+  priceAtSale: number
+) => {
+  await axios.post(`${databaseUrl}/sellshares`, null, {
+    params: { ...bundle, quantity, priceAtSale },
+  });
+};
