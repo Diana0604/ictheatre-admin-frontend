@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { getCompanies, getSellers } from '../../api/database'
+import CompanyFloatingShares from '../../components/CompanyFloatingShares'
 import Navbar from '../../components/navbar/NavBar'
 import PlayerInformation from '../../components/PlayerInformation'
 import SellerInformation from '../../components/SellerInformation'
@@ -15,6 +16,9 @@ export default function State() {
   const [sellersInformation, setSellersInformation] = useState<any>({})
   const [sharersDisplay, setSharersDisplay] = useState<any[]>([])
   const [allCompanies, setAllCompanies] = useState<any[]>([])
+  const [companiesDisplay, setCompaniesDisplay] = useState<any[]>([]);
+  const [playerCompanyShares, setPlayerCompanyShares] = useState<any[]>([]);
+  const [playerCompanyDisplay, setPlayerCompanyDisplay] = useState<any[]>([]);
 
   useEffect(() => {
   }, [])
@@ -39,6 +43,14 @@ export default function State() {
     setSharersDisplay(newDisplay)
   }, [sellersInformation])
 
+  useEffect(() => {
+    const newDisplay = []
+    for (const company of allCompanies) {
+      newDisplay.push(<CompanyFloatingShares key={company.id} company={company} />)
+    }
+    setCompaniesDisplay(newDisplay)
+  }, [allCompanies])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -53,6 +65,9 @@ export default function State() {
           <PlayerInformation />
           <div style={{ marginLeft: "50px" }}>
             {sharersDisplay}
+          </div>
+          <div style={{ marginLeft: "50px" }}>
+            {companiesDisplay}
           </div>
         </div>
       </main>
