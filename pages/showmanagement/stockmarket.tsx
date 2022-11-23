@@ -17,8 +17,6 @@ export default function State() {
   const [sharersDisplay, setSharersDisplay] = useState<any[]>([])
   const [allCompanies, setAllCompanies] = useState<any[]>([])
   const [companiesDisplay, setCompaniesDisplay] = useState<any[]>([]);
-  const [playerCompanyShares, setPlayerCompanyShares] = useState<any[]>([]);
-  const [playerCompanyDisplay, setPlayerCompanyDisplay] = useState<any[]>([]);
 
   useEffect(() => {
   }, [])
@@ -62,7 +60,7 @@ export default function State() {
       <Navbar />
       <main>
         <div style={{ display: "flex", height: "100%" }}>
-          <PlayerInformation />
+          <PlayerInformation companiesList={allCompanies} />
           <div style={{ marginLeft: "50px" }}>
             {sharersDisplay}
           </div>
