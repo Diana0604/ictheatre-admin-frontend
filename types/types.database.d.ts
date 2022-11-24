@@ -8,9 +8,9 @@ export interface ICompanyProperties {
 }
 
 export interface IPlayerCompany {
+  stockValueScore: ReactNode;
   id: number;
   name: string;
-  currentPricePerShare: number;
   publicRelationsIndex: number;
   liquidAssets: number;
 }
