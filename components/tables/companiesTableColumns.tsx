@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteCompany, saveCompany } from '../../api/database';
+import { addCompany, deleteCompany, saveCompany } from '../../api/database';
 import { ICompanyProperties } from '../../types/types.database';
 import { cellValue } from "../../types/types.table";
 
@@ -43,13 +43,14 @@ export default [
     Header: "Save",
     accessor: "save",
     Cell: ({ cell }: { cell: any }) => {
+      console.log(cell.value)
       const handleSaveChanges = () => {
         //transforming table rows into json object is a bit bleh. I should work on making this all more beautiful.
         //FIRST -> get all rows
         const newCompany = cell.row.cells.map((cellValue: cellValue) => {
           if (cellValue.column.id != 'delete' && cellValue.column.id != 'save')
             return [cellValue.column.id, cellValue.value]
-          if (cellValue.column.id === 'save') return ['id', cell.value]
+          if (cellValue.column.id === 'save' && cell.value != undefined) return ['id', cell.value]
         })
         //SECOND => trim rows that are not relevant
         const newCompanyObject = Object.fromEntries(newCompany.filter((value: cellValue) => {
@@ -58,7 +59,12 @@ export default [
         //THIRD => Add current price equal to init price
         newCompanyObject.currentPricePerShare = newCompanyObject.initPricePerShare
         //FOURTH => Send to API
-        saveCompany(newCompanyObject as ICompanyProperties)
+        if (cell.value != undefined)
+          saveCompany(newCompanyObject as ICompanyProperties)
+        else
+          addCompany(newCompanyObject as ICompanyProperties).then((added) => {
+            if (added) window.location.reload();
+          })
       }
       return <button onClick={() => { handleSaveChanges() }}>Save Changes</button>
     },
@@ -73,7 +79,7 @@ export default [
           if (deleted) window.location.reload();
         })
       }
-      return (<button onClick={() => { handleDelete() }} value="delete" >
+      return (<button disabled={cell.value === undefined} onClick={() => { handleDelete() }} value="delete" >
         Delete
       </button>
       )

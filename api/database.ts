@@ -40,7 +40,7 @@ export const getCompanies = async () => {
  */
 export const deleteCompany = async (companyId: number) => {
   try {
-    await axios.delete(`${databaseUrl}/company/${companyId}`);
+    await axios.delete(`${databaseUrl}/companies/${companyId}`);
     return true;
   } catch (error) {
     console.log(`ERROR while trying to delete company with id: ${companyId}`);
@@ -56,13 +56,24 @@ export const deleteCompany = async (companyId: number) => {
 export const saveCompany = async (companyObject: ICompanyProperties) => {
   try {
     await axios.put(
-      `${databaseUrl}/company/${companyObject.id}`,
+      `${databaseUrl}/companies/${companyObject.id}`,
       {},
       { params: companyObject }
     );
   } catch (error) {
     console.log(`ERROR: could not save ${companyObject.id}`);
     console.log(error);
+  }
+};
+
+export const addCompany = async (companyObject: ICompanyProperties) => {
+  try {
+    await axios.post(`${databaseUrl}/companies`, {}, { params: companyObject });
+    return true;
+  } catch (error) {
+    console.log(`ERROR: could not add new company`);
+    console.log(error);
+    return false;
   }
 };
 
@@ -129,6 +140,16 @@ export const deleteSeller = async (sellerId: number) => {
   }
 };
 
+export const addSeller = async (sellerObject: any) => {
+  try {
+    await axios.post(`${databaseUrl}/sellers`, {}, { params: sellerObject });
+    return true;
+  } catch (error) {
+    console.log(`ERROR: could not add new seller`);
+    console.log(error);
+    return false;
+  }
+};
 /**
  * obtain player compani object from api
  * @returns player company information
@@ -184,7 +205,7 @@ export const buyShares = async (
   quantity: number,
   priceAtSale: number
 ) => {
-  await axios.post(`${databaseUrl}/buyshares`, null, {
+  await axios.put(`${databaseUrl}/buyshares`, null, {
     params: { ...bundle, quantity, priceAtSale },
   });
 };

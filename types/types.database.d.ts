@@ -1,5 +1,5 @@
 export interface ICompanyProperties {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   initPricePerShare: number; //price at init of show
@@ -9,7 +9,7 @@ export interface ICompanyProperties {
 
 export interface IPlayerCompany {
   stockValueScore: ReactNode;
-  id: number;
+  id?: number;
   name: string;
   publicRelationsIndex: number;
   liquidAssets: number;

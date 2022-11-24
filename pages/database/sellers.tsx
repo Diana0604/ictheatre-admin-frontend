@@ -16,6 +16,7 @@ export default function Sellers() {
   const [companiesList, setCompaniesList] = useState<any[]>([])
   //tableColumns is the titles of the columns and cell definition 
   const [tableColumns, setTableColumns] = useState(sellerTableColumns)
+  const [emptySeller, setEmptySeller] = useState<any>({ name: '', delete: undefined, save: undefined })
 
   //upon rendering -> get list of companies and set it to companiesList object
   useEffect(() => {
@@ -27,8 +28,10 @@ export default function Sellers() {
 
   //upon updating companiesList -> add necessary columns to headers so that we have one column per company
   useEffect(() => {
+    const newEmptySeller = { ...emptySeller }
     const currentTableColumns = []
     for (const company of companiesList) {
+      newEmptySeller[company.id] = 0
       currentTableColumns.push({
         Header: `${company.name} Shares` as string,
         accessor: `${company.id}`,
@@ -41,6 +44,8 @@ export default function Sellers() {
       if (header.accessor === "name") currentTableColumns.unshift(header)
       else currentTableColumns.push(header)
     }
+    setEmptySeller(newEmptySeller)
+    console.log(newEmptySeller)
     setTableColumns(currentTableColumns)
   }, [companiesList])
 
@@ -60,6 +65,8 @@ export default function Sellers() {
             }
           }
         }
+        console.log(sellersList)
+        sellersList.push(emptySeller)
         setSellersList(sellersList)
       }
     })

@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteSeller, saveSeller, saveShareBundle } from '../../api/database';
+import { addSeller, deleteSeller, saveSeller, saveShareBundle } from '../../api/database';
 import { cellValue } from "../../types/types.table";
 
 /**
@@ -23,19 +23,30 @@ export default [
     Cell: ({ cell }: { cell: any }) => {
       const handleSaveChanges = () => {
         //obtain all information on this row
-        const sellerInformation = { name: '', id: cell.value }
-        cell.row.cells.map((cellValue: cellValue) => {
-          if (cellValue.column.id != 'delete' && cellValue.column.id != 'save') {
-            if (cellValue.column.id === 'name') sellerInformation.name = cellValue.value
-            else {
-              console.log(cellValue.column)
-              const id = cell.value as number * cellValue.column.id as number;
-              const newBundle = { ownerId: cell.value, companyId: cellValue.column.id, quantity: cellValue.value, id: id }
-              saveShareBundle(newBundle)
+        if (cell.value != undefined) {
+          const sellerInformation = { name: '', id: cell.value }
+          cell.row.cells.map((cellValue: cellValue) => {
+            if (cellValue.column.id != 'delete' && cellValue.column.id != 'save') {
+              if (cellValue.column.id === 'name') sellerInformation.name = cellValue.value
+              else {
+                console.log(cellValue.column)
+                const id = cell.value as number * cellValue.column.id as number;
+                const newBundle = { ownerId: cell.value, companyId: cellValue.column.id, quantity: cellValue.value, id: id }
+                saveShareBundle(newBundle)
+              }
+            }
+          })
+          saveSeller(sellerInformation)
+        } else {
+          for (const cellValue of cell.row.cells) {
+            if (cellValue.column.id === 'name') {
+              addSeller({ name: cellValue.value }).then(added => {
+                if (added) window.location.reload();
+              })
+              return
             }
           }
-        })
-        saveSeller(sellerInformation)
+        }
       }
       return <button onClick={() => { handleSaveChanges() }}>Save Changes</button>
     },
@@ -50,7 +61,7 @@ export default [
           if (deleted) window.location.reload();
         })
       }
-      return (<button onClick={() => { handleDelete() }} value="delete" >
+      return (<button disabled={cell.value === undefined} onClick={() => { handleDelete() }} value="delete" >
         Delete
       </button>
       )

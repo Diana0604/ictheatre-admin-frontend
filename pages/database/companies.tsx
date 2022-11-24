@@ -4,13 +4,14 @@ import companiesTableColumns from "../../components/tables/companiesTableColumns
 import Navbar from "../../components/navbar/NavBar"
 import TableContainer from "../../components/tables/TableContainer"
 import styles from '../../styles/Home.module.css'
-
+const emptyCompany = { name: '', description: '', initialPricePerShare: '', finalPricePerShare: '' }
 /**
  * Display an editeable table with companies information that can be modified and updated to the server
  * @returns Companies table object
  */
 export default function Companies() {
   const [companiesList, setCompaniesList] = useState([])
+
 
   useEffect(() => {
     //at first render -> get full list of compaines from API and store it in companiesList object
@@ -21,6 +22,7 @@ export default function Companies() {
           company.delete = company.id
           company.save = company.id
         }
+        newList.push(emptyCompany)
         setCompaniesList(newList)
       }
     })
