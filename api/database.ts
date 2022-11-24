@@ -144,6 +144,19 @@ export const getPlayerCompany = async () => {
   }
 };
 
+export const savePlayerCompany = async (playerCompany: any) => {
+  try {
+    await axios.put(`${databaseUrl}/playercompany`, null, {
+      params: playerCompany,
+    });
+    return true;
+  } catch (error) {
+    console.log(`ERROR: while trying to save player company`);
+    console.log(error);
+    return false;
+  }
+};
+
 /**
  * request to sell shares from a seller back to company.
  * @param bundle
@@ -155,7 +168,7 @@ export const sellShares = async (
   quantity: number,
   priceAtSale: number
 ) => {
-  await axios.post(`${databaseUrl}/sellshares`, null, {
+  await axios.put(`${databaseUrl}/sellshares`, null, {
     params: { ...bundle, quantity, priceAtSale },
   });
 };
@@ -166,7 +179,7 @@ export const sellShares = async (
  * @param quantity
  * @param priceAtSale
  */
-export const buyShares = async(
+export const buyShares = async (
   bundle: any,
   quantity: number,
   priceAtSale: number

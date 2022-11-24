@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { getPlayerCompany } from "../../api/database";
+import React, { useEffect, useState } from "react";
+import { getPlayerCompany, savePlayerCompany } from "../../api/database";
 import { IPlayerCompany } from "../../types/types.database";
 
 /**
@@ -29,7 +29,10 @@ const PlayerInformation = () => {
       alert("You are trying to take out more money than the company has")
       return
     }
-    console.log(`not implemented. Will add $${sign * liquidAssets}`)
+    const newPlayerCompany = { ...playerCompanyInformation }
+    newPlayerCompany.liquidAssets += sign * liquidAssets
+    //console.log(`not implemented. Will add $${sign * liquidAssets}`)
+    savePlayerCompany(newPlayerCompany)
   }
 
   const addRemoveStockValue = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, sign: 1 | -1) => {
@@ -43,7 +46,10 @@ const PlayerInformation = () => {
       alert("You are trying to take out points than the company has")
       return
     }
-    console.log(`not implemented. Will add $${sign * stockValue}`)
+    //console.log(`not implemented. Will add $${sign * stockValue}`)
+    const newPlayerCompany = { ...playerCompanyInformation }
+    newPlayerCompany.stockValueScore += sign * stockValue
+    savePlayerCompany(newPlayerCompany)
   }
 
   const addRemovePRScore = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, sign: 1 | -1) => {
@@ -61,7 +67,10 @@ const PlayerInformation = () => {
       alert("PR score would be above 100 after operation")
       return
     }
-    console.log(`not implemented. Will add $${sign * pRScore}`)
+    //console.log(`not implemented. Will add $${sign * pRScore}`)
+    const newPlayerCompany = { ...playerCompanyInformation }
+    newPlayerCompany.publicRelationsIndex += sign * pRScore / 100
+    savePlayerCompany(newPlayerCompany)
   }
 
   return <div>Company: {playerCompanyInformation.name}
