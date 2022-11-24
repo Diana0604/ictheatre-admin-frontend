@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { getPlayerCompany } from "../api/database";
-import { IPlayerCompany } from "../types/types.database";
-import PlayerShares from "./PlayerShares";
+import React, { useState } from "react";
+import { getPlayerCompany } from "../../api/database";
+import { IPlayerCompany } from "../../types/types.database";
 
 /**
  * Display the player company information

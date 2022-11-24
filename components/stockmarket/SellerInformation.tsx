@@ -1,4 +1,5 @@
 import React from "react";
+import Dropdown from "../Dropdown";
 import BundleInformation from "./BundleInformation";
 /**
  * Seller information with their bundles and shares and everything
@@ -9,7 +10,6 @@ const SellerInformation = ({ seller, bundles, companies }: { seller: any, bundle
   const relevantBundles = []
   for (const bundle of bundles) {
     if (bundle.ownerId != seller.id) continue;
-    if (bundle.quantity === 0) continue;
     for (const company of companies) {
       if (bundle.companyId != company.id) continue;
       const relevantBundle = <BundleInformation key={bundle.id} bundle={bundle} company={company} />
@@ -20,9 +20,9 @@ const SellerInformation = ({ seller, bundles, companies }: { seller: any, bundle
     <div>
       <h3>Seller: {seller.name}</h3>
     </div>
-    <div>
+    <Dropdown>
       {relevantBundles}
-    </div>
+    </Dropdown>
   </>
 }
 

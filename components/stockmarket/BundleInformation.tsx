@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { sellShares } from "../api/database";
+import { buyShares, sellShares } from "../../api/database";
 
 const BundleInformation = ({ bundle, company }: any) => {
 
-  const [inputValue, setInputValue] = useState('')
+  const [inputValueSell, setInputValueSell] = useState('')
+  const [inputValueBuy, setInputValueBuy] = useState('')
 
   const handleSell = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    const sharesToSell = parseInt(inputValue)
+    const sharesToSell = parseInt(inputValueSell)
     if (isNaN(sharesToSell)) {
       alert("You need to input a number to sell")
       return
@@ -19,13 +20,29 @@ const BundleInformation = ({ bundle, company }: any) => {
     sellShares(bundle, sharesToSell, company.currentPricePerShare)
   }
 
+  const handleBuy = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    const sharesToBuy = parseInt(inputValueBuy)
+    if (isNaN(sharesToBuy)) {
+      alert("You need to input a number to sell")
+      return
+    }
+    buyShares(bundle, sharesToBuy, company.currentPricePerShare)
+  }
+
   return <div style={{ marginBottom: "40px" }}>
     <b>{company.name}:</b> {bundle.quantity} shares.
     Price per share: ${company.currentPricePerShare}
     {//<form onSubmit={(event) => { handleSell(event) }}>
     }
-    <input onChange={(event => { setInputValue(event.target.value) })}></input>
+    <div>
+    <input onChange={(event => { setInputValueSell(event.target.value) })}></input>
     <button onClick={(event) => {handleSell(event)}}>Sell Shares</button>
+    </div>
+    <div>
+    <input onChange={(event => { setInputValueBuy(event.target.value) })}></input>
+    <button onClick={(event) => {handleBuy(event)}}>Buy Shares</button>
+    </div>
     {//</form>
     }
   </div>

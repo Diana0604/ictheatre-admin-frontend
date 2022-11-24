@@ -145,7 +145,7 @@ export const getPlayerCompany = async () => {
 };
 
 /**
- * request to sell shares from a seller back to company. Extra shares are left as floating.
+ * request to sell shares from a seller back to company.
  * @param bundle
  * @param quantity
  * @param priceAtSale
@@ -158,5 +158,20 @@ export const sellShares = async (
   await axios.post(`${databaseUrl}/sellshares`, null, {
     params: { ...bundle, quantity, priceAtSale },
   });
-  console.log("shares sold");
+};
+
+/**
+ * request to buy shares from a company.
+ * @param bundle
+ * @param quantity
+ * @param priceAtSale
+ */
+export const buyShares = async(
+  bundle: any,
+  quantity: number,
+  priceAtSale: number
+) => {
+  await axios.post(`${databaseUrl}/buyshares`, null, {
+    params: { ...bundle, quantity, priceAtSale },
+  });
 };

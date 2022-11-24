@@ -1,10 +1,9 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { getCompanies, getSellers } from '../../api/database'
-import CompanyFloatingShares from '../../components/CompanyFloatingShares'
 import Navbar from '../../components/navbar/NavBar'
-import PlayerInformation from '../../components/PlayerInformation'
-import SellerInformation from '../../components/SellerInformation'
+import PlayerInformation from '../../components/stockmarket/PlayerInformation'
+import SellerInformation from '../../components/stockmarket/SellerInformation'
 import styles from '../../styles/Home.module.css'
 
 /**
@@ -16,7 +15,6 @@ export default function State() {
   const [sellersInformation, setSellersInformation] = useState<any>({})
   const [sharersDisplay, setSharersDisplay] = useState<any[]>([])
   const [allCompanies, setAllCompanies] = useState<any[]>([])
-  const [companiesDisplay, setCompaniesDisplay] = useState<any[]>([]);
 
   useEffect(() => {
   }, [])
@@ -41,14 +39,6 @@ export default function State() {
     setSharersDisplay(newDisplay)
   }, [sellersInformation])
 
-  useEffect(() => {
-    const newDisplay = []
-    for (const company of allCompanies) {
-      newDisplay.push(<CompanyFloatingShares key={company.id} company={company} />)
-    }
-    setCompaniesDisplay(newDisplay)
-  }, [allCompanies])
-
   return (
     <div className={styles.container}>
       <Head>
@@ -61,11 +51,8 @@ export default function State() {
       <main>
         <div style={{ display: "flex", height: "100%" }}>
           <PlayerInformation />
-          <div style={{ marginLeft: "50px" }}>
+          <div style={{ marginLeft: "100px" }}>
             {sharersDisplay}
-          </div>
-          <div style={{ marginLeft: "50px" }}>
-            {companiesDisplay}
           </div>
         </div>
       </main>
