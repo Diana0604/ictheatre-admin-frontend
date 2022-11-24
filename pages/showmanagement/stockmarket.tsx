@@ -60,7 +60,7 @@ export default function State() {
       <Navbar />
       <main>
         <div style={{ display: "flex", height: "100%" }}>
-          <PlayerInformation companiesList={allCompanies} />
+          <PlayerInformation />
           <div style={{ marginLeft: "50px" }}>
             {sharersDisplay}
           </div>
