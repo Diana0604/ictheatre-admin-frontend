@@ -50,8 +50,10 @@ export default function State() {
       <Navbar />
       <main>
         <div style={{ display: "flex", height: "100%" }}>
-          <PlayerInformation />
-          <div style={{ marginLeft: "100px" }}>
+          <div style={{ position: "fixed" }}>
+            <PlayerInformation />
+          </div>
+          <div style={{ marginLeft: "50%" }}>
             {sharersDisplay}
           </div>
         </div>
