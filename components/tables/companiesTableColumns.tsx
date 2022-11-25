@@ -33,10 +33,15 @@ export default [
     }
   },
   {
-    Header: "Final Price Per Share",
-    accessor: "finalPricePerShare",
+    Header: "Tendency",
+    accessor: "tendency",
     Cell: ({ cell }: { cell: any }) => {
-      return (<input defaultValue={cell.value} onChange={(e) => { cell.value = e.target.value }}></input>)
+      return <select value={cell.value} onChange={(e) => { cell.value = e.target.value; console.log(cell.value) }}>
+        <option value="0">Neutral</option>
+        <option value="1">Up</option>
+        <option value="-1">Down</option>
+      </select>
+      //return (<input defaultValue={cell.value} onChange={(e) => { cell.value = e.target.value }}></input>)
     }
   },
   {
@@ -59,7 +64,7 @@ export default [
         //THIRD => Add current price equal to init price
         newCompanyObject.currentPricePerShare = newCompanyObject.initPricePerShare
         //FOURTH => Send to API
-        if (cell.value != undefined){
+        if (cell.value != undefined) {
           saveCompany(newCompanyObject as ICompanyProperties)
           alert('copmany information has been saved in database')
         }
