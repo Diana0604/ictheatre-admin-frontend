@@ -31,17 +31,17 @@ const BundleInformation = ({ bundle, company }: any) => {
   }
 
   return <div style={{ marginBottom: "40px" }}>
-    <b>{company.name}:</b> {bundle.quantity} shares.
-    Price per share: ${company.currentPricePerShare}
+    <b>{company.name}:</b> {parseFloat(bundle.quantity).toFixed(2)} shares.
+    Price per share: ${parseFloat(company.currentPricePerShare).toFixed(2)}
     {//<form onSubmit={(event) => { handleSell(event) }}>
     }
     <div>
-    <input onChange={(event => { setInputValueSell(event.target.value) })}></input>
-    <button onClick={(event) => {handleSell(event)}}>Sell Shares</button>
+      <input onChange={(event => { setInputValueSell(event.target.value) })}></input>
+      <button onClick={(event) => { handleSell(event) }}>Sell Shares</button>
     </div>
     <div>
-    <input onChange={(event => { setInputValueBuy(event.target.value) })}></input>
-    <button onClick={(event) => {handleBuy(event)}}>Buy Shares</button>
+      <input onChange={(event => { setInputValueBuy(event.target.value) })}></input>
+      <button onClick={(event) => { handleBuy(event) }}>Buy Shares</button>
     </div>
     {//</form>
     }

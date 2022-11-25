@@ -59,8 +59,10 @@ export default [
         //THIRD => Add current price equal to init price
         newCompanyObject.currentPricePerShare = newCompanyObject.initPricePerShare
         //FOURTH => Send to API
-        if (cell.value != undefined)
+        if (cell.value != undefined){
           saveCompany(newCompanyObject as ICompanyProperties)
+          alert('copmany information has been saved in database')
+        }
         else
           addCompany(newCompanyObject as ICompanyProperties).then((added) => {
             if (added) window.location.reload();

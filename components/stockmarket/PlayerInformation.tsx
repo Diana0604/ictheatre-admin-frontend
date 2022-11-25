@@ -74,19 +74,19 @@ const PlayerInformation = () => {
   }
 
   return <div>Company: {playerCompanyInformation.name}
-    <div>Liquid Assets: ${playerCompanyInformation.liquidAssets} </div>
+    <div>Liquid Assets: ${playerCompanyInformation.liquidAssets.toFixed(2)} </div>
     <div>
       <input onChange={(event) => { setInputAssetsValue(event.target.value) }}></input>
       <button onClick={(event) => { addRemoveLiquidAssets(event, 1) }}>Add Liquid Assets</button>
       <button onClick={(event) => { addRemoveLiquidAssets(event, -1) }}>Remove Liquid Assets</button>
     </div>
-    <div>Stock Value Score: {playerCompanyInformation.stockValueScore}</div>
+    <div>Stock Value Score: {playerCompanyInformation.stockValueScore.toFixed(2)}</div>
     <div>
       <input onChange={(event) => { setStockValue(event.target.value) }}></input>
       <button onClick={(event) => { addRemoveStockValue(event, 1) }}>Add Stock Value Score</button>
       <button onClick={(event) => { addRemoveStockValue(event, -1) }}>Remove Stock Value Score</button>
     </div>
-    <div>Public Relations Index: {playerCompanyInformation.publicRelationsIndex * 100} %</div>
+    <div>Public Relations Index: {(playerCompanyInformation.publicRelationsIndex * 100).toFixed(2)} %</div>
     <div>
       <input onChange={(event) => { setPRScore(event.target.value) }}></input>
       <button onClick={(event) => { addRemovePRScore(event, 1) }}>Add PR Score</button>

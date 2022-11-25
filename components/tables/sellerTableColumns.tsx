@@ -35,6 +35,7 @@ export default [
             }
           })
           saveSeller(sellerInformation)
+          alert('seller information has been saved in database')
         } else {
           for (const cellValue of cell.row.cells) {
             if (cellValue.column.id === 'name') {
