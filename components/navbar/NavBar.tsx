@@ -5,9 +5,11 @@ import NavItem from "./NavItem";
  * List of menues in the page that we want to display in the navbar
  */
 const MENU_LIST = [
-  { text: "Admin", href: "/admin" },
-  { text: "State Display", href: "/state" },
-  { text: "Companies Manager", href: "/companies" },
+  { text: "Companies Setup", href: "/database/companies" },
+  { text: "Player Company Setup", href: "/database/audiencecompany" },
+  { text: "Sellers Setup", href: "/database/sellers" },
+  { text: "Show Management - Admin ", href: "/showmanagement/admin" },
+  { text: "Show Management - Stock Market", href: "/showmanagement/stockmarket" },
 ];
 
 /**

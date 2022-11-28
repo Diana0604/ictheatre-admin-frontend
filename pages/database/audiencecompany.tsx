@@ -1,7 +1,8 @@
 import React from "react";
+import Navbar from "../../components/navbar/NavBar";
 
 const AudienceCompany = () => {
-  return <>Audience company page</>
+  return <><Navbar/>Audience company page</>
 }
 
 export default AudienceCompany
