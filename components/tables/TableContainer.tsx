@@ -32,10 +32,12 @@ const TableContainer = ({ columns, data }: { columns: readonly Column<{}>[], dat
     <div>
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>
+          {headerGroups.map((headerGroup, index) => (
+            //@ts-ignore
+            <tr key={`hg${index}`} {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column, indexCol) => (
+                //@ts-ignore
+                <th key={`hgc${index}${indexCol}`} {...column.getHeaderProps()}>
                   {column.render('Header')}
                 </th>
               ))}
@@ -48,7 +50,7 @@ const TableContainer = ({ columns, data }: { columns: readonly Column<{}>[], dat
              * rows (from react-table documentation):
              * An array of materialized row objects from the original data array and columns passed into the table options
              */
-            rows.map((row) => {
+            rows.map((row, index) => {
               /**
                * prepareRow (from react-table documentation):
                * This function is responsible for lazily preparing a row for rendering.
@@ -57,9 +59,11 @@ const TableContainer = ({ columns, data }: { columns: readonly Column<{}>[], dat
               prepareRow(row);
               //setup object that will be displayed
               return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                //@ts-ignore
+                <tr key={`row${index}`} {...row.getRowProps()}>
+                  {row.cells.map((cell, index) => {
+                    //@ts-ignore
+                    return <td key={`cell${index}`} {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                   })}
                 </tr>
               );
