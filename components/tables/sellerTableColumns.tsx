@@ -29,7 +29,7 @@ export default [
             if (cellValue.column.id != 'delete' && cellValue.column.id != 'save') {
               if (cellValue.column.id === 'name') sellerInformation.name = cellValue.value
               else {
-                const newBundle = { ownerId: cell.value, companyId: cellValue.column.id, quantity: cellValue.value }
+                const newBundle = { ownerId: cell.value, companyId: cellValue.column.id, quantity: cellValue.value, initialQuantity: cellValue.value }
                 saveShareBundle(newBundle)
               }
             }
