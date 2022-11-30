@@ -209,3 +209,33 @@ export const buyShares = async (
     params: { ...bundle, quantity, priceAtSale },
   });
 };
+
+export const sellPlayerShares = async (
+  bundle: any,
+  quantity: number,
+  priceAtSale: number
+) => {
+  await axios.put(`${databaseUrl}/sellplayershares`, null, {
+    params: { ...bundle, quantity, priceAtSale },
+  });
+};
+
+export const buyPlayerShares = async (
+  bundle: any,
+  quantity: number,
+  priceAtSale: number
+) => {
+  await axios.put(`${databaseUrl}/buyplayershares`, null, {
+    params: { ...bundle, quantity, priceAtSale },
+  });
+};
+
+export const getPlayerBundles = async () => {
+  try {
+    const res = await axios.get(`${databaseUrl}/playerbundles`);
+    return res.data;
+  } catch (error) {
+    console.log("error getting companies back");
+    console.log(error);
+  }
+};

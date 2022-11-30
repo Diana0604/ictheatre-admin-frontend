@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import { getCompanies, getSellers } from '../../api/database'
+import { getCompanies, getSellers, getPlayerBundles, getPlayerCompany } from '../../api/database'
 import Navbar from '../../components/navbar/NavBar'
+import PlayerBundleList from '../../components/stockmarket/PlayerBundleList'
 import PlayerInformation from '../../components/stockmarket/PlayerInformation'
 import SellerInformation from '../../components/stockmarket/SellerInformation'
 import styles from '../../styles/Home.module.css'
+import { IPlayerCompany } from '../../types/types.database'
 
 /**
  * Display state of game (current stock value, company player info etc.)
@@ -15,6 +17,8 @@ export default function State() {
   const [sellersInformation, setSellersInformation] = useState<any>({})
   const [sharersDisplay, setSharersDisplay] = useState<any[]>([])
   const [allCompanies, setAllCompanies] = useState<any[]>([])
+  const [playerBundles, setPlayerBundles] = useState<any[]>([])
+  const [playerInformation, setPlayerInformation] =  useState<IPlayerCompany>({ name: "loading", id: 0, stockValueScore: 0, publicRelationsIndex: 0, liquidAssets: 0 })
 
   useEffect(() => {
   }, [])
@@ -24,20 +28,26 @@ export default function State() {
       setAllCompanies(companies)
       getSellers().then(newSellers => {
         setSellersInformation(newSellers)
+        getPlayerBundles().then(newBundles => {
+          setPlayerBundles(newBundles)
+          getPlayerCompany().then(newPlayer => {
+            setPlayerInformation(newPlayer)
+          })
+        })
       })
     })
   }, 1000)
 
   useEffect(() => {
-    if (Object.keys(sellersInformation).length === 0) return;
+    if (Object.keys(sellersInformation).length === 0 || Object.keys(playerBundles).length === 0) return;
     const sellers = sellersInformation.sellers;
     const shareBundles = sellersInformation.shareBundles;
-    const newDisplay = []
+    const newDisplay = [<PlayerBundleList key='player' bundles={playerBundles} companies={allCompanies} liquidAssets={playerInformation.liquidAssets} />]
     for (const seller of sellers) {
       newDisplay.push(<SellerInformation key={seller.id} bundles={shareBundles} seller={seller} companies={allCompanies} />)
     }
     setSharersDisplay(newDisplay)
-  }, [sellersInformation])
+  }, [playerBundles])
 
   return (
     <div className={styles.container}>
@@ -51,7 +61,7 @@ export default function State() {
       <main>
         <div style={{ display: "flex", height: "100%" }}>
           <div style={{ position: "fixed" }}>
-            <PlayerInformation />
+            <PlayerInformation playerInformation={playerInformation} />
           </div>
           <div style={{ marginLeft: "50%" }}>
             {sharersDisplay}
