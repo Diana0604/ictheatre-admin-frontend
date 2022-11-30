@@ -29,6 +29,7 @@ export default [
     Header: "Initial Price Per Share",
     accessor: "initPricePerShare",
     Cell: ({ cell }: { cell: any }) => {
+      if (cell.value === undefined) cell.value = 0;
       return (<input defaultValue={cell.value} onChange={(e) => { cell.value = e.target.value }}></input>)
     }
   },
@@ -36,19 +37,18 @@ export default [
     Header: "Tendency",
     accessor: "tendency",
     Cell: ({ cell }: { cell: any }) => {
-      return <select value={cell.value} onChange={(e) => { cell.value = e.target.value; console.log(cell.value) }}>
+      if (cell.value === undefined) cell.value = "0"
+      return <select defaultValue={cell.value} onChange={(e) => { cell.value = e.target.value }}>
         <option value="0">Neutral</option>
         <option value="1">Up</option>
         <option value="-1">Down</option>
       </select>
-      //return (<input defaultValue={cell.value} onChange={(e) => { cell.value = e.target.value }}></input>)
     }
   },
   {
     Header: "Save",
     accessor: "save",
     Cell: ({ cell }: { cell: any }) => {
-      console.log(cell.value)
       const handleSaveChanges = () => {
         //transforming table rows into json object is a bit bleh. I should work on making this all more beautiful.
         //FIRST -> get all rows
