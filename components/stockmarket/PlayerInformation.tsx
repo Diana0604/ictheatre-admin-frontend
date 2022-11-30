@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { getPlayerCompany, savePlayerCompany } from "../../api/database";
-import { IPlayerCompany } from "../../types/types.database";
+import { savePlayerCompany } from "../../api/database";
 
 /**
  * Display the player company information
@@ -11,13 +10,6 @@ const PlayerInformation = ({ playerInformation }: { playerInformation: any }) =>
   const [inputAssetsValue, setInputAssetsValue] = useState('')
   const [inputStockValue, setStockValue] = useState('')
   const [inputPRScore, setPRScore] = useState('')
-  /*
-  setTimeout(() => {
-    getPlayerCompany().then(company => {
-      setPlayerCompanyInformation(company)
-    })
-  }, 1000)
-  */
 
   const addRemoveLiquidAssets = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, sign: 1 | -1) => {
     event.preventDefault();
