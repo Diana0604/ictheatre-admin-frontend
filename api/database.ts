@@ -156,7 +156,7 @@ export const addSeller = async (sellerObject: any) => {
  */
 export const getPlayerCompany = async () => {
   try {
-    const res = await axios.get(`${databaseUrl}/playercompany`);
+    const res = await axios.get(`${databaseUrl}/companies/playercompany`);
     return res.data;
   } catch (error) {
     console.log(`ERROR while trying to get player company`);
@@ -167,7 +167,7 @@ export const getPlayerCompany = async () => {
 
 export const savePlayerCompany = async (playerCompany: any) => {
   try {
-    await axios.put(`${databaseUrl}/playercompany`, null, {
+    await axios.put(`${databaseUrl}/companies/playercompany`, null, {
       params: playerCompany,
     });
     return true;
@@ -189,7 +189,7 @@ export const sellShares = async (
   quantity: number,
   priceAtSale: number
 ) => {
-  await axios.put(`${databaseUrl}/sellshares`, null, {
+  await axios.post(`${databaseUrl}/shares/sell`, null, {
     params: { ...bundle, quantity, priceAtSale },
   });
 };
@@ -205,7 +205,7 @@ export const buyShares = async (
   quantity: number,
   priceAtSale: number
 ) => {
-  await axios.put(`${databaseUrl}/buyshares`, null, {
+  await axios.post(`${databaseUrl}/shares/buy`, null, {
     params: { ...bundle, quantity, priceAtSale },
   });
 };
@@ -215,7 +215,7 @@ export const sellPlayerShares = async (
   quantity: number,
   priceAtSale: number
 ) => {
-  await axios.put(`${databaseUrl}/sellplayershares`, null, {
+  await axios.post(`${databaseUrl}/shares/playersell`, null, {
     params: { ...bundle, quantity, priceAtSale },
   });
 };
@@ -225,14 +225,14 @@ export const buyPlayerShares = async (
   quantity: number,
   priceAtSale: number
 ) => {
-  await axios.put(`${databaseUrl}/buyplayershares`, null, {
+  await axios.post(`${databaseUrl}/shares/playerbuy`, null, {
     params: { ...bundle, quantity, priceAtSale },
   });
 };
 
 export const getPlayerBundles = async () => {
   try {
-    const res = await axios.get(`${databaseUrl}/playerbundles`);
+    const res = await axios.get(`${databaseUrl}/shares/playerbundles`);
     return res.data;
   } catch (error) {
     console.log("error getting companies back");
