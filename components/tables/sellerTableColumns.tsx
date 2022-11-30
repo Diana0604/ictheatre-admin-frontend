@@ -25,9 +25,16 @@ export default [
         //obtain all information on this row
         if (cell.value != undefined) {
           const sellerInformation = { name: '', id: cell.value }
+          console.log(cell.row.cells)
           cell.row.cells.map((cellValue: cellValue) => {
             if (cellValue.column.id != 'delete' && cellValue.column.id != 'save') {
-              if (cellValue.column.id === 'name') sellerInformation.name = cellValue.value
+              if (cellValue.column.id === 'name') {
+                sellerInformation.name = cellValue.value
+                if (sellerInformation.name === '') {
+                  alert('Your selelr needs a name!')
+                  return
+                }
+              }
               else {
                 const newBundle = { ownerId: cell.value, companyId: cellValue.column.id, quantity: cellValue.value, initialQuantity: cellValue.value }
                 saveShareBundle(newBundle)
@@ -39,8 +46,13 @@ export default [
         } else {
           for (const cellValue of cell.row.cells) {
             if (cellValue.column.id === 'name') {
+              if (cellValue.value === '') {
+                alert('You need to give a name to your seller!')
+                return;
+              }
               addSeller({ name: cellValue.value }).then(added => {
                 if (added) window.location.reload();
+                else alert('could not save seller')
               })
               return
             }
