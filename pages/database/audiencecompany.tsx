@@ -5,12 +5,28 @@ import { IPlayerCompany } from "../../types/types.database";
 
 const AudienceCompany = () => {
   const [companyInformation, setCompanyInformation] = useState<IPlayerCompany>({ name: "loading", liquidAssets: 0, stockValueScore: 0, publicRelationsIndex: 0 })
+  const [name,setName] = useState<string>("loading")
+  /*
+  const [companyInformation, setCompanyInformation] = useState<IPlayerCompany>({ name: "loading", liquidAssets: 0, stockValueScore: 0, publicRelationsIndex: 0 })
+  const [companyInformation, setCompanyInformation] = useState<IPlayerCompany>({ name: "loading", liquidAssets: 0, stockValueScore: 0, publicRelationsIndex: 0 })
+  const [companyInformation, setCompanyInformation] = useState<IPlayerCompany>({ name: "loading", liquidAssets: 0, stockValueScore: 0, publicRelationsIndex: 0 })
+  */
 
+  /*
+  getPlayerCompany().then(company => {
+    console.log(company)
+    setCompanyInformation(company)
+  })
+  */
+
+  
   useEffect(() => {
     getPlayerCompany().then(company => {
+      setName(company.name) //setting name to force change FOR NOW this is a grea
       setCompanyInformation(company)
     })
   }, [])
+
 
   const handleSave = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault()
