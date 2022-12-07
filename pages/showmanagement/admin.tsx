@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { playShow, pauseShow } from '../../api/showManagement'
-import { restartDatabase } from '../../api/database'
+import { getShowStatus, restartDatabase } from '../../api/database'
 import Navbar from '../../components/navbar/NavBar'
 
 /**
@@ -15,6 +15,12 @@ export default function Admin() {
   const [playing, isPlaying] = useState(false) //stores if show is currently playing
   const [warningOn, setWarningOn] = useState(false) //stores if restart database warning shoud be displayed
   const warning = "YOU TRIED RESETTING THE DATABASE WHEN SHOW WAS PLAYING! PAUSE SHOW AND TRY AGAIN" //warning to be displayed when user attempts to restart database while show is playing
+
+  useEffect(() => {
+    getShowStatus().then(status => {
+      isPlaying(status.isPlaying)
+    })
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -39,3 +45,4 @@ export default function Admin() {
     </div>
   )
 }
+

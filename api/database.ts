@@ -241,3 +241,13 @@ export const getPlayerBundles = async () => {
     console.log(error);
   }
 };
+
+export const getShowStatus = async () => {
+  try {
+    const res = await axios.get(`${databaseUrl}/showstatus`);
+    return res.data;
+  } catch (error) {
+    console.log("error getting companies back");
+    console.log(error);
+  }
+};

@@ -22,7 +22,6 @@ const AudienceCompany = () => {
   
   useEffect(() => {
     getPlayerCompany().then(company => {
-      setName(company.name) //setting name to force change FOR NOW this is a grea
       setCompanyInformation(company)
     })
   }, [])
@@ -87,6 +86,9 @@ const AudienceCompany = () => {
 
   return <>
     <Navbar />
+    <hr/>
+    <div style={{backgroundColor:"#fcd9d9"}}>Hi! Diana Here. This page has some error that I didn't manage to fix :/ . If you are seeing the name coming up as 'loading', please refresh the page.</div>
+    <hr/>
     <p>Name: </p>
     <input defaultValue={companyInformation.name} onChange={(event => { handleNameChange(event) })} />
     <p>Liquid Assets: </p>
