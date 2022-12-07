@@ -30,7 +30,7 @@ const BundleInformation = ({ bundle, company }: any) => {
     buyShares(bundle, sharesToBuy, company.currentPricePerShare)
   }
 
-  return <div style={{ marginBottom: "40px" }}>
+  return <div style={{ marginBottom: "40px", backgroundColor: bundle.quantity > 0 ? "#79fc98" : "#ffffff" }}>
     <b>{company.name}:</b> {parseFloat(bundle.quantity).toFixed(2)} shares.
     Price per share: ${parseFloat(company.currentPricePerShare).toFixed(2)}
     {//<form onSubmit={(event) => { handleSell(event) }}>
