@@ -23,9 +23,7 @@ export const restartDatabase = async (setWarningOn: setterFunction) => {
  * get list of all companies from database
  * @returns json object with all companies and company information
  */
-let counter = 0
 export const getCompanies = async () => {
-  console.log(`asking for companies ${counter++}`)
   try {
     const res = await axios.get(`${databaseUrl}/companies`);
     return res.data;

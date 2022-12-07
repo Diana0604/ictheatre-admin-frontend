@@ -22,10 +22,8 @@ export default function State() {
   const [playerInformation, setPlayerInformation] = useState<IPlayerCompany>({ name: "loading", id: 0, stockValueScore: 0, publicRelationsIndex: 0, liquidAssets: 0 })
   const [interval, setStateInterval] = useState<NodeJS.Timer | null>(null)
   useEffect(() => {
-    console.log('adding new interval')
     if (interval === null) {
       setStateInterval(setInterval(() => {
-        console.log('intervaling')
         getCompanies().then(companies => {
           getSellers().then(newSellers => {
             getPlayerBundles().then(newBundles => {
