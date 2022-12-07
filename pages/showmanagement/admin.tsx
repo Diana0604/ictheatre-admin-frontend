@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import { playShow, pauseShow } from '../../api/showManagement'
+import { killServer } from '../../api/operatingsystem'
 import { getShowStatus, restartDatabase } from '../../api/database'
 import Navbar from '../../components/navbar/NavBar'
 
@@ -40,6 +41,9 @@ export default function Admin() {
         </div>
         <div>
           <button onClick={() => { restartDatabase(setWarningOn) }}>Restart Database</button>
+        </div>
+        <div>
+          <button onClick={() => { killServer() }}>Shutdown Server</button>
         </div>
       </main>
     </div>
