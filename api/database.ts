@@ -240,6 +240,16 @@ export const getPlayerBundles = async () => {
   }
 };
 
+export const getSellerBundles = async (sellerId : string) => {
+  try {
+    const res = await axios.get(`${databaseUrl}/sellers/${sellerId}/shares`)
+    return res.data
+  } catch(error) {
+    console.log("error getting seller bundles");
+    console.log(error);
+  }
+}
+
 export const getShowStatus = async () => {
   try {
     const res = await axios.get(`${databaseUrl}/showstatus`);

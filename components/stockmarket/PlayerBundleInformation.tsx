@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { buyPlayerShares, sellPlayerShares } from "../../api/database";
 
 const PlayerBundleInformation = ({ bundle, company, liquidAssets }: any) => {
-  
+
   const [inputValueSell, setInputValueSell] = useState('')
   const [inputValueBuy, setInputValueBuy] = useState('')
 
@@ -27,7 +27,7 @@ const PlayerBundleInformation = ({ bundle, company, liquidAssets }: any) => {
       alert("You need to input a number to sell")
       return
     }
-    if(liquidAssets < sharesToBuy*company.currentPricePerShare) {
+    if (liquidAssets < sharesToBuy * company.currentPricePerShare) {
       alert("The Player is trying to buy above their possibilities")
       return
     }
@@ -37,6 +37,7 @@ const PlayerBundleInformation = ({ bundle, company, liquidAssets }: any) => {
   return <div style={{ marginBottom: "40px" }}>
     <b>{company.name}:</b> {parseFloat(bundle.quantity).toFixed(2)} shares.
     Price per share: ${parseFloat(company.currentPricePerShare).toFixed(2)}
+    Bought at: ${parseFloat(bundle.boughtAt).toFixed(2)}
     {//<form onSubmit={(event) => { handleSell(event) }}>
     }
     <div>
